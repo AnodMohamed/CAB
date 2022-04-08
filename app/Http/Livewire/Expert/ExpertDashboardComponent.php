@@ -3,12 +3,15 @@
 namespace App\Http\Livewire\Expert;
 
 use Livewire\Component;
+use App\Models\Profile;
+use App\Models\User;
 use App\Http\Middleware\AuthExpert;
 use Illuminate\Support\Facades\Auth;
 class ExpertDashboardComponent extends Component
 {
     public function render()
     {
+
         return view('livewire.expert.expert-dashboard-component')->layout('layouts.base');
     }
 }

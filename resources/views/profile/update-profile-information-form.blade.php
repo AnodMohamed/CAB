@@ -8,6 +8,8 @@
     </x-slot>
 
     <x-slot name="form">
+       
+        
         <!-- Profile Photo -->
         @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
             <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
@@ -23,13 +25,24 @@
                                     };
                                     reader.readAsDataURL($refs.photo.files[0]);
                             " />
-
+                    
                 <x-jet-label for="photo" value="{{ __('Photo') }}" />
 
                 <!-- Current Profile Photo -->
-                <div class="mt-2" x-show="! photoPreview">
-                    <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" class="rounded-full h-20 w-20 object-cover">
-                </div>
+
+
+                profile-photos/8FFm7J2dZ5AuPPxCJPn94QjaRTgyyibJiCRcn31g.jpg
+                {{--------we add this part ---------}}
+                @if($this->user->profile_photo_path == NULL)
+                    <div class="mt-2" x-show="! photoPreview">
+                        <img src="{{ asset('storage/profile-photos/default-avatar.png') }}" alt="" class="rounded-full h-20 w-20 object-cover">
+                    </div>
+                @else
+                    <div class="mt-2" x-show="! photoPreview">
+                        <img src="{{ asset('storage') }}/{{$this->user->profile_photo_path}}" alt="" class="rounded-full h-20 w-20 object-cover">
+                    </div>
+                @endif
+
 
                 <!-- New Profile Photo Preview -->
                 <div class="mt-2" x-show="photoPreview" style="display: none;">
@@ -65,6 +78,7 @@
             <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
             <x-jet-input-error for="email" class="mt-2" />
         </div>
+         
     </x-slot>
 
     <x-slot name="actions">

@@ -1,7 +1,10 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <div class="row">
+                <img class="col-md-12" src="{{ asset('assets/images/logo.png')  }}" style="display: flex;margin: auto;">
+                <h2 class="col-md-12">Consultation &  Book Consulter Appointment </h2>
+            </div>
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />

@@ -1,10 +1,17 @@
 <?php
 use App\Http\Livewire\Admin\AdminDashboardComponent;
+use App\Http\Livewire\Admin\ChangeExpertStauts;
+use App\Http\Livewire\Admin\ManageAskersComponent;
+use App\Http\Livewire\Admin\ManageExpertsComponent;
+use App\Http\Livewire\Admin\ViewExpProfessionalProfileComponent;
 use App\Http\Livewire\Asker\AakerDashboardComponent;
 use App\Http\Livewire\Expert\ExpertDashboardComponent;
+use App\Http\Livewire\Expert\ExpProfessionalProfileComponent;
+use App\Http\Livewire\Expert\UploadeFileComponent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\HomeComponent;
-
+use App\Http\Livewire\ProfileComponent;
+use Laravel\Fortify\Http\Controllers\ProfileInformationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,17 +25,29 @@ use App\Http\Livewire\HomeComponent;
 */
 
 
-Route::get('/', HomeComponent::class);
+Route::get('/', HomeComponent::class)->name('home');
 
+//all users has been registered
+Route::middleware(['auth:sanctum','verified','auth'])->group(function(){
+    Route::get('/profile',ProfileComponent::class)->name('profile');
+
+});
 
 //admin 
 Route::middleware(['auth:sanctum','verified','authAdmin'])->group(function(){
     
     Route::get('/admin/dashboard',AdminDashboardComponent::class)->name('admin.dashboard');
+    Route::get('/admin/Askers',ManageAskersComponent::class)->name('admin.Askers');
+    Route::get('/admin/Experts',ManageExpertsComponent::class)->name('admin.Experts');
+    Route::get('/admin/Experts/ExpertProfessionalProfile/{user_id:id}',ViewExpProfessionalProfileComponent::class)->name('admin.Experts.ExpertProfessionalProfile');
+    Route::get('/admin/Experts/ChangeExpertStatus/{user_id:id}',ChangeExpertStauts::class)->name('admin.Experts.ChangeExpertStatus');
+
 });
 //Expert 
 Route::middleware(['auth:sanctum','verified','authExpert'])->group(function(){
     Route::get('/expert/dashboard',ExpertDashboardComponent::class)->name('expert.dashboard');
+    Route::get('/expert/profile/professional',ExpProfessionalProfileComponent::class)->name('expert.profile.professional');
+    Route::get('/expert/profile/uploadeFile',UploadeFileComponent::class)->name('expert.profile.uploadeFile');
 
 });
 

@@ -9,7 +9,6 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -59,4 +58,17 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function profile()
+    {
+        /***** one to one relation because each expert has one profile ********/
+        return $this->hasOne(Profile::class, 'user_id');
+
+    }
+    public function file()
+    {
+        /***** one to one relation because each expert many file ********/
+        return $this->hasMany(File::class, 'user_id');
+
+    }
 }
