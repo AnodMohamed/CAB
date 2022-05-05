@@ -18,7 +18,7 @@
                     <div class="team-member equal-elem">
                         <div class="media">
                             @if($user->profile_photo_path == NULL)
-                                <img src="{{ asset('storage/profile-photos/default-avatar.png') }}"  style="width: 233px; height:233px; ">
+                                <img src="{{ asset('storage/profile-photos/avatar.png') }}"  style="width: 233px; height:233px; ">
                             @else
                                 <img src="{{ asset('storage') }}/{{$user->profile_photo_path}}" style="width: 233px; height:233px; ">
                             @endif
@@ -26,27 +26,40 @@
                         <div class="info">
                             <b class="box-title">{{$user->name}} </b>
                             <b class="box-title">{{$user->email}} </b>
-                            @if($user->utype == "EXP")
-                                <b class="name">price</b>
-                                <span class="title">{{$user->profile->price}}</span>
-                                <br>
-                                <b class="name">featured</b>
-                                <span class="title"></span>
-                                <p class="desc">
-                                    @if ($user->profile->featured == "0")
-                                        Inactive
-                                    @elseif ($user->profile->featured == "1")
-                                        Active
-                                    @elseif ($user->profile->featured == "2")
-                                        Rejected
-                                    @endif
-                                </p>
+                            @if($user->utype == "EXP" )
+                                @php
+                                    $profile = DB::table('profiles')->where('user_id',$user->id)->first();
+                                @endphp
+                                @if ($profile != '')
+                                        <b class="name">price</b>
+                                        <span class="title">{{$user->profile->price}}</span>
+                                        <br>
+                                        <b class="name">featured</b>
+                                        <span class="title"></span>
+                                        <p class="desc">
+                                            @if ($user->profile->featured == "0")
+                                                Inactive
+                                            @elseif ($user->profile->featured == "1")
+                                                Active
+                                            @elseif ($user->profile->featured == "2")
+                                                Rejected
+                                            @endif
+                                        </p>
+                                        @php
+                                            $category = DB::table('categories')->where('id',$profile->category_id)->first();
+                                        @endphp
+                                        <b class="name">Category</b>
+                                        <span class="title">{{$category->name}}</span>
+                                        
+                                @endif    
                             @endif
                         </div>
                         @if($user->utype == "EXP")
-                            <p class="txt-content">
-                                {{$user->profile->bio}}
-                            </p>
+                            @if ($profile != '')
+                                <p class="txt-content">
+                                    {{$user->profile->bio}}
+                                </p>
+                            @endif
                         @endif
                         @if (Session::has('message'))
                             <div class="alert alert-success" role="alert">

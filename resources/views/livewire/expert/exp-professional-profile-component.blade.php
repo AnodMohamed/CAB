@@ -34,7 +34,7 @@
                             @enderror
                         </div>
 
-                        {{---
+                        
                         <div class="mb-6 col-8">
                             <label class=" control-label">Category </label>
                             <select class="form-control" wire:model="category_id"> 
@@ -43,8 +43,8 @@
                                 @endforeach
                             </select>
                         </div>
-                        ---}}
-                    <div class="row" style="margin: 10px auto;">
+
+                        <div class="row" style="margin: 10px auto;">
                         <button type="submit"  class="btn btn-primary"  style="display: flex;margin: auto;"> Submit</button>
                     </div>       
             </form>

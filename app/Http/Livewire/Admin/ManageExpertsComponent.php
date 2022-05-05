@@ -28,7 +28,7 @@ class ManageExpertsComponent extends Component
 
         $users = User::where('name','LIKE', $search)
                 ->orWhere('email','LIKE',$search)
-                ->orWhere('id','LIKE',$search)-> paginate()
+                ->orWhere('id','LIKE',$search)-> paginate(6)
                 ->where('utype', 'EXP');
 
         return view('livewire.admin.manage-experts-component',['users'=>$users])->layout('layouts.base');

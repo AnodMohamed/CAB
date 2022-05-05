@@ -22,7 +22,7 @@ class ManageAskersComponent extends Component
         $search ='%'.$this->searchTerm. '%';
         $users = User::where('name','LIKE', $search)
                 ->orWhere('email','LIKE',$search)
-                ->orWhere('id','LIKE',$search)-> paginate()
+                ->orWhere('id','LIKE',$search)-> paginate(6)
                 ->where('utype', 'ASK');
 
         //get user data

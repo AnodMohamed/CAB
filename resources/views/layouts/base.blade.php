@@ -51,16 +51,11 @@
 							<ul>
 								
 								<li class="menu-item lang-menu menu-item-has-children parent">
-									<a title="English" href="#"><span class="img label-before"><img src="{{ asset('assets/images/lang-en.png') }}" alt="lang-en"></span>English<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-									<ul class="submenu lang" >
-										<li class="menu-item" ><a title="hungary" href="#"><span class="img label-before"><img src="{{ asset('assets/images/lang-hun.png') }}" alt="lang-hun"></span>Hungary</a></li>
-										<li class="menu-item" ><a title="german" href="#"><span class="img label-before"><img src="{{ asset('assets/images/lang-ger.png') }}" alt="lang-ger" ></span>German</a></li>
-										<li class="menu-item" ><a title="french" href="#"><span class="img label-before"><img src="{{ asset('assets/images/lang-fra.png') }}" alt="lang-fre"></span>French</a></li>
-										<li class="menu-item" ><a title="canada" href="#"><span class="img label-before"><img src="{{ asset('assets/images/lang-can.png') }}" alt="lang-can"></span>Canada</a></li>
-									</ul>
+									<a title="Experts" href="{{ route('Experts') }}" class="img label-before">Experts</a>
+									
 								</li>
 								<li class="menu-item menu-item-has-children parent" >
-									<a title="Dollar (USD)" href="#">Dollar (USD)<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+									<a title="Dollar (USD)" href="{{ route('Experts') }}">Dollar (USD)<i class="fa fa-angle-down" aria-hidden="true"></i></a>
 									<ul class="submenu curency" >
 										<li class="menu-item" >
 											<a title="Pound (GBP)" href="#">Pound (GBP)</a>
@@ -87,6 +82,9 @@
 													</li>
 													<li class="menu-item" >
 														<a title="Experts" href="{{ route('admin.Experts') }}">Experts</a>
+													</li>
+													<li class="menu-item" >
+														<a title="Categories" href="{{ route('admin.Categories') }}">Categories</a>
 													</li>
 													<li class="menu-item" >
 														<a title="User" href="{{ route('profile') }}">Profile</a>

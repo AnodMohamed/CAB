@@ -31,10 +31,10 @@
                 <!-- Current Profile Photo -->
 
 
-                profile-photos/8FFm7J2dZ5AuPPxCJPn94QjaRTgyyibJiCRcn31g.jpg
                 {{--------we add this part ---------}}
                 @if($this->user->profile_photo_path == NULL)
                     <div class="mt-2" x-show="! photoPreview">
+                        
                         <img src="{{ asset('storage/profile-photos/default-avatar.png') }}" alt="" class="rounded-full h-20 w-20 object-cover">
                     </div>
                 @else

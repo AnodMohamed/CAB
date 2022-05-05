@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Expert;
 
+use App\Models\Category;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Profile;
@@ -13,13 +14,21 @@ class ExpProfessionalProfileComponent extends Component
     public $user_id;
     public $bio;
     public $price;
+    public $category_id;
 
     public function mount(){
-        $user =User::find(Auth::user()->id);
-        $this->id = $user->id;
-        $this->bio = $user->profile->bio;
-        $this->price = $user->profile->price;
-       // $this->category_id = $product->category_id;
+        $user =Profile::where('user_id',Auth::user()->id)->first();
+        if($user != Null)
+        {
+            $this->id = $user->id;
+            $this->bio = $user->bio;
+            $this->price = $user->price;
+            $this->category_id = $user->category_id;
+
+        }
+        /*
+       
+        */
     }
 
     public function updated($fields)
@@ -27,7 +36,7 @@ class ExpProfessionalProfileComponent extends Component
         $this->validateOnly($fields,[
             'bio'=>'required',
             'price'=>'required|numeric',
-            //'category_id'=>'required',
+            'category_id'=>'required',
         ]);
 
     }
@@ -35,15 +44,25 @@ class ExpProfessionalProfileComponent extends Component
         $this->validate([
             'bio'=>'required',
             'price'=>'required|numeric',
-            //'category_id'=>'required',
+            'category_id'=>'required',
         ]);
-        //send data to database
-        $user =User::find(Auth::user()->id);
-        $user->profile->bio = $this->bio;
-        $user->profile->price = $this->price;
-        
-        //$product->category_id = $this->category_id;
-        $user->profile->save();
+
+        $user =Profile::where('user_id',Auth::user()->id)->first();
+
+        if($user != Null)
+        {
+            $user->bio = $this->bio;
+            $user->price = $this->price;
+            $user->category_id = $this->category_id;
+        }else{
+            $user = new Profile();
+            $user->user_id = Auth::user()->id;
+            $user->bio = $this->bio;
+            $user->price = $this->price;
+        }
+        $user->save();
+
+
 
         //send message to user
         session()->flash('message', 'Profional Profile is updated successfully');
@@ -53,7 +72,7 @@ class ExpProfessionalProfileComponent extends Component
     public function render()
     {
         $user =User::find(Auth::user()->id);
-
-        return view('livewire.expert.exp-professional-profile-component',['user'=>$user])->layout('layouts.base');
+        $categories = Category::all();
+        return view('livewire.expert.exp-professional-profile-component',['user'=>$user,'categories'=>$categories])->layout('layouts.base');
     }
 }
