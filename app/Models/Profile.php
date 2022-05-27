@@ -14,9 +14,10 @@ class Profile extends Model
      *
      * @var string[]
      */
-    public function category()
+    public function user()
     {
-        return $this->belongsTo(Category::class,'category_id');
+        /***** one to one relation because each expert has one profile ********/
+        return $this->hasOne(User::class, 'id');
 
     }
 

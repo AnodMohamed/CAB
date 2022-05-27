@@ -23,7 +23,7 @@ class AddCategoryComponent extends Component
     public function storeCategory(){
 
         $this->validate([
-            'name' => 'required|unique:categories ',
+            'name' => 'required|unique:categories',
             'slug' => 'required|unique:categories'
         ]);
         $category= new Category();

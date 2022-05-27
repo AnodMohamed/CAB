@@ -1,4 +1,4 @@
-<main id="main" class="main-site">
+<main id="main" class="main-site" style="padding: 100px 0px;">
 
     <div class="container">
        <div class="wrap-breadcrumb">
@@ -29,7 +29,7 @@
                
                  <div class="mb-6 col-8">
                      <label class=" control-label">Category Slug</label>
-                     <input type="bu" placeholder="Category Slug" class="form-control input-md" wire:model="slug"/>
+                     <input type="text" placeholder="Category Slug" class="form-control input-md" wire:model="slug"/>
                      @error('slug')
                          <p class="text-danger">{{$message}}</p>
                      @enderror

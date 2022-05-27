@@ -3,7 +3,9 @@
 namespace App\Http\Livewire;
 
 use App\Models\File;
+use App\Models\Review;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class ViewExpertProfileComponent extends Component
@@ -29,6 +31,8 @@ class ViewExpertProfileComponent extends Component
     }
     public function render()
     {
-        return view('livewire.view-expert-profile-component');
+        $reviews = Review::where('person', Auth::user()->id)->paginate(6);
+
+        return view('livewire.view-expert-profile-component',['reviews'=>$reviews])->layout('layouts.base');
     }
 }

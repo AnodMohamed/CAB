@@ -9,7 +9,7 @@ class HomeComponent extends Component
 {
     public function render()
     {
-        $experts =User::where('utype','EXP')->get();
+        $experts =User::where('utype','EXP')->take(10)->get();
         return view('livewire.home-component',['experts'=>$experts])->layout('layouts.base');
     }
 }

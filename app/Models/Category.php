@@ -9,9 +9,9 @@ class Category extends Model
 {
     use HasFactory;
     protected $table ="categories";
-    public function category()
-    {
-        return $this->belongsTo(Profile::class,'category_id');
+    protected $fillable = [
+        'name',
+        'slug',
+    ];
 
-    }
 }
